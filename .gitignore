@@ -1,0 +1,23 @@
+# Ignore all output folders recursively
+**/output/
+
+# Ignore common compiled files
+*.exe
+*.o
+*.obj
+*.class
+*.out
+*.pyc
+*.pyo
+*.dll
+*.so
+*.a
+*.lib
+*.bin
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore system files
+.DS_Store
+Thumbs.db

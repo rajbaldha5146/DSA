@@ -10,7 +10,7 @@ public:
 
         for (int i = 0; i < count; i++)
         {
-            for (int j = i + 1; i < count; i++)
+            for (int j = i + 1; j < count; j++)
             {
                 if (arr[i] + arr[j] == target)
                 {

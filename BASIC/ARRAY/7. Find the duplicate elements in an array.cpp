@@ -1,5 +1,6 @@
-#include <iostream>
-#include <vector>
+// #include <iostream>
+// #include <vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 class solution
@@ -43,6 +44,25 @@ public:
             cout << ans[i] << " ";
         }
     }
+
+    void OptimalFindDuplicate(vector<int> &arr)
+    {
+        int count = arr.size();
+        unordered_map<int,int>ans;
+
+        for (int i = 0; i < count; i++)
+        {
+            ans[arr[i]]++;
+        }
+        
+        for(auto item : ans)
+        {
+            if(item.second > 1)
+            {
+                cout << item.first << " ";
+            }
+        }
+    }
 };
 
 int main()
@@ -62,7 +82,8 @@ int main()
     }
 
     solution obj;
-    obj.findDuplicate(arr);
+    // obj.findDuplicate(arr);
+    obj.OptimalFindDuplicate(arr);
 
     return 0;
 }

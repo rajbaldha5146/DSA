@@ -1,34 +1,34 @@
-#include <iostream>
-#include <vector>
+// #include <iostream>
+// #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 class solution
 {
-    public:
-        void moveZerosToEnd(vector<int>& arr)
+public:
+    void moveZerosToEnd(vector<int> &arr)
+    {
+        int count = arr.size();
+        int j = -1; // Pointer to place zero elements
+
+        for (int i = 0; i < count; i++)
         {
-            int count = arr.size();
-            int j = 0; // Pointer to place non-zero elements
-
-            // Step 1: Move all non-zero elements to the front
-            for (int i = 0; i < count; i++)
+            if (arr[i] == 0)
             {
-                if(arr[i] != 0)
-                {
-                    arr[j] = arr[i];
-                    j++;
-                }
+                j = i;
+                break;
             }
-
-            // Step 2: Fill remaining positions with 0
-            while( j < count )
-            {
-                arr[j] = 0;
-                j++;
-            }
-            
         }
 
+        for (int i = j + 1; i < count; i++)
+        {
+            if (arr[i] != 0)
+            {
+                swap(arr[j], arr[i]);
+                j++;
+            }
+        }
+    }
 };
 
 int main()
@@ -54,5 +54,4 @@ int main()
     {
         cout << num << " ";
     }
-    
 }
