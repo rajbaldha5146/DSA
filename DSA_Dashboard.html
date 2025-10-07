@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My DSA Journey</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
+          sans-serif;
+        background: #f5f7fa;
+        padding: 15px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        background: white;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      }
+
+      header h1 {
+        font-size: 28px;
+        color: #2c3e50;
+        margin-bottom: 5px;
+      }
+
+      header p {
+        color: #7f8c8d;
+        font-size: 14px;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        border-left: 3px solid #3498db;
+      }
+
+      .stat-card:nth-child(2) {
+        border-left-color: #9b59b6;
+      }
+
+      .stat-card:nth-child(3) {
+        border-left-color: #e74c3c;
+      }
+
+      .stat-card:nth-child(4) {
+        border-left-color: #2ecc71;
+      }
+
+      .stat-label {
+        color: #7f8c8d;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .stat-number {
+        font-size: 32px;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      .charts-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 900px) {
+        .charts-section {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .chart-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      }
+
+      .chart-card h2 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .topics-section {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      }
+
+      .topics-section h2 {
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .topic-category {
+        margin-bottom: 15px;
+        border: 1px solid #ecf0f1;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+
+      .topic-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 15px;
+        background: #fafbfc;
+        transition: background 0.2s;
+      }
+
+      .topic-header:hover {
+        background: #f1f3f5;
+      }
+
+      .topic-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: #2c3e50;
+      }
+
+      .topic-count {
+        background: #3498db;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .problems-list {
+        display: none;
+        padding: 15px;
+        background: white;
+      }
+
+      .problems-list.active {
+        display: block;
+      }
+
+      .problem-item {
+        padding: 10px 0;
+        color: #34495e;
+        font-size: 14px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .problem-item:last-child {
+        border-bottom: none;
+      }
+
+      .problem-item:before {
+        content: "✓";
+        color: #27ae60;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      canvas {
+        max-height: 350px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>DSA Progress Tracker</h1>
+        <p>Last updated: October 6, 2025</p>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Problems Solved</div>
+          <div class="stat-number">95</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Topics</div>
+          <div class="stat-number">13</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Top Category</div>
+          <div class="stat-number" style="font-size: 20px">Patterns (22)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-number" style="font-size: 24px; color: #2ecc71">
+            Active
+          </div>
+        </div>
+      </div>
+
+      <div class="charts-section">
+        <div class="chart-card">
+          <h2>Problems by Category</h2>
+          <canvas id="categoryChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h2>Distribution Overview</h2>
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+
+      <div class="topics-section">
+        <h2>All Topics & Problems</h2>
+        <div id="topicsContainer"></div>
+      </div>
+    </div>
+
+    <script>
+      const dsaData = {
+        "BASIC DSA": [
+          "A number is odd or even",
+          "Check if a number is an Armstrong number",
+          "Check if a number is prime",
+          "Check if it is a palindrome",
+          "Count the number of digits in a number",
+          "Factorial of a number",
+          "Fibonacci series up to N terms",
+          "Find the largest of three numbers without using max()",
+          "HCF and LCM of two numbers",
+          "If a year is a leap year",
+        ],
+        PATTERNS: [
+          "Star Rectangle",
+          "Right-Angled Triangle",
+          "Sequential Number Half Pyramid",
+          "Repeating Number Half Pyramid",
+          "Inverted Right-Angled Triangle",
+          "Inverted Sequential Number Half Pyramid",
+          "Pyramid",
+          "Inverted Pyramid",
+          "Diamond",
+          "Hourglass",
+          "0 and 1 Alternating Pattern",
+          "Numeric Full Pyramid",
+          "Continuous Counting Half Pyramid",
+          "Sequential Alphabet Half Pyramid",
+          "Inverted Sequential Alphabet Half Pyramid",
+          "Repeating Alphabet Half Pyramid",
+          "Alphabetical Palindromic Pyramid",
+          "Backward Counting Right-Aligned Half Pyramid",
+          "Hollow Diamond",
+          "Central Gap Diamond",
+          "Border",
+          "Number Square Wave",
+        ],
+        ARRAY: [
+          "Find the largest and smallest element in an array",
+          "Find the second largest second smallest element in an array",
+          "Reverse an array (in-place)",
+          "Find the sum of all elements in an array",
+          "Check if an array is sorted",
+          "Find the missing number in a range",
+          "Find the duplicate elements in an array",
+          "Find the frequency of each element",
+          "Move all zeros to the end while maintaining order",
+          "Find the pair of elements with a given sum",
+        ],
+        "2D ARRAY": [
+          "Waveform Traversal",
+          "Spiral Traversal",
+          "Transpose Matrix",
+          "Rotate Image",
+          "Set Matrix Zeroes",
+          "Search a 2D Matrix",
+          "Print Diagonals of a Matrix",
+        ],
+        STRING: [
+          "Reverse a string",
+          "Check if a string is a palindrome",
+          "Count vowels and consonants in a string",
+          "Find the frequency of characters in a string",
+          "Check if two strings are anagrams",
+          "Int to string and string to int",
+          "Remove duplicates from a string",
+          "Find the first non-repeating character in a string",
+          "Check if a string contains only digits",
+        ],
+        RECURSION: [
+          "Factorial",
+          "2 power(n)",
+          "Find Nth Fibonacci",
+          "Print fibonacci up to n",
+          "Ways To Reach Stair",
+          "Array is sorted",
+          "Linear search",
+          "Binary search",
+        ],
+        "LINKED LIST": [
+          "LinkedList",
+          "Insert At First",
+          "Insert At Last",
+          "Insert At Position",
+        ],
+        "BINARY SEARCH": [
+          "Binary Search",
+          "Find First and Last Position of Element in Sorted Array",
+          "Search Insert Position",
+        ],
+        HASHMAP: ["Max Frequency Count"],
+        "STRIVER - ARRAY (EASY)": [
+          "Largest Element in an Array",
+          "Second Largest Element in an Array without sorting",
+          "Check if the array is sorted",
+          "Remove duplicates from Sorted array",
+          "Left Rotate an array by one place",
+          "Left rotate an array by D places",
+          "Move Zeros to end",
+          "Linear Search",
+          "Find the Union Of Sorted Array",
+          "Intersection of two sorted array",
+          "Find missing number in an array",
+          "Maximum Consecutive Ones",
+          "Find the number that appears once, and other numbers twice",
+          "Zero Sum SubArray",
+          "SubArray Sum Equal To K",
+        ],
+        "STRIVER - ARRAY (MEDIUM)": [
+          "2Sum Problem",
+          "Majority Element",
+          "Kadane's Algorithm, maximum subarray sum",
+          "Stock Buy and Sell",
+          "Longest Substring Without Repeating Characters",
+          "Find the sum of all indices except the Current Index",
+        ],
+        "STRIVER - STRING": [
+          "Remove outermost Parenthesis",
+          "Reverse Words in a String",
+          "Largest Odd Number in String",
+        ],
+        "STRIVER - SLIDING WINDOW": [
+          "Longest Substring Without Repeating Characters",
+        ],
+      };
+
+      // Render topics
+      const topicsContainer = document.getElementById("topicsContainer");
+      Object.entries(dsaData).forEach(([topic, problems]) => {
+        const topicDiv = document.createElement("div");
+        topicDiv.className = "topic-category";
+        topicDiv.innerHTML = `
+                <div class="topic-header" onclick="toggleProblems(this)">
+                    <span class="topic-title">${topic}</span>
+                    <span class="topic-count">${problems.length} problems</span>
+                </div>
+                <div class="problems-list">
+                    ${problems
+                      .map((p) => `<div class="problem-item">${p}</div>`)
+                      .join("")}
+                </div>
+            `;
+        topicsContainer.appendChild(topicDiv);
+      });
+
+      function toggleProblems(header) {
+        const problemsList = header.nextElementSibling;
+        problemsList.classList.toggle("active");
+      }
+
+      // Charts
+      const labels = Object.keys(dsaData);
+      const data = Object.values(dsaData).map((arr) => arr.length);
+
+      const colors = [
+        "#3498db",
+        "#9b59b6",
+        "#e74c3c",
+        "#2ecc71",
+        "#f39c12",
+        "#1abc9c",
+        "#34495e",
+        "#e67e22",
+        "#95a5a6",
+        "#16a085",
+        "#c0392b",
+        "#8e44ad",
+        "#2980b9",
+      ];
+
+      // Bar Chart
+      const ctxBar = document.getElementById("categoryChart").getContext("2d");
+      new Chart(ctxBar, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Problems",
+              data: data,
+              backgroundColor: colors,
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 5,
+                font: { size: 11 },
+              },
+              grid: {
+                color: "#f0f0f0",
+              },
+            },
+            x: {
+              ticks: {
+                maxRotation: 45,
+                minRotation: 45,
+                font: { size: 10 },
+              },
+              grid: {
+                display: false,
+              },
+            },
+          },
+        },
+      });
+
+      // Doughnut Chart
+      const ctxPie = document.getElementById("pieChart").getContext("2d");
+      new Chart(ctxPie, {
+        type: "doughnut",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              data: data,
+              backgroundColor: colors,
+              borderWidth: 3,
+              borderColor: "#fff",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                boxWidth: 12,
+                padding: 8,
+                font: { size: 11 },
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
