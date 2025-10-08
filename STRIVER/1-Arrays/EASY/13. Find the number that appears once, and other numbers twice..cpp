@@ -7,7 +7,7 @@ public:
     int singleNumber(vector<int> &arr)
     {
         int n = arr.size(); // store size in variable
-        int ans = 0;
+        int ans = 0; // should be assign zero verna error ayega
 
         for (int i = 0; i < n; i++)
         {

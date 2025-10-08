@@ -31,14 +31,24 @@ public:
 
 class OptimalSolution
 {
-    public:
-        // Function to left rotate array by D places
-        void leftRotate(vector<int> &arr, int d)
-        {
-            reverse(arr.begin(), arr.begin() + d);
-            reverse(arr.begin() + d, arr.end());
-            reverse(arr.begin(), arr.end());
-        }
+public:
+    // Function to left rotate array by D places
+    void leftRotate(vector<int> &arr, int d)
+    {
+        int n = arr.size();
+        if (n == 0)
+            return;
+
+        d %= n; // make d within [0, n-1]
+        if (d < 0)
+            d += n; // optional: support negative d
+        if (d == 0)
+            return; // nothing to do
+
+        reverse(arr.begin(), arr.begin() + d);
+        reverse(arr.begin() + d, arr.end());
+        reverse(arr.begin(), arr.end());
+    }
 };
 
 int main()

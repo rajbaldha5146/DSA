@@ -4,6 +4,26 @@ using namespace std;
 class Solution
 {
 public:
+    vector<int> intersection(vector<int> &arr1, vector<int> &arr2)
+    {
+        // code here
+        //unordered_set for unsorted array
+        //set for ordered array
+
+        set<int> s(arr1.begin(), arr1.end());
+        set<int> s2;
+
+        for (auto num : arr2)
+        {
+            if (s.count(num))
+            {
+                s2.insert(num);
+            }
+        }
+
+        return vector<int>(s2.begin(), s2.end());
+    }
+
     vector<int> findIntersection(vector<int> &arr1, vector<int> &arr2)
     {
         int n1 = arr1.size();
@@ -31,7 +51,6 @@ public:
         return ans;
     }
 };
-
 
 int main()
 {
