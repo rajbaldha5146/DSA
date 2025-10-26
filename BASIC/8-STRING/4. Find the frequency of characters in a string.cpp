@@ -1,6 +1,7 @@
-#include <iostream>
-#include <string>
-#include <vector>
+// #include <iostream>
+// #include <string>
+// #include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 class solution
@@ -42,6 +43,21 @@ public:
             }
         }
     }
+
+    void frequency_map(string &s)
+    {
+        unordered_map<char,int>fre;
+
+        for( char ch : s )
+        {
+            fre[ch]++;
+        }
+
+        for( auto key : fre )
+        {
+            cout << key.first << " : " << key.second << endl;
+        }
+    }
 };
 
 int main()
@@ -53,5 +69,5 @@ int main()
     getline(cin, s);
 
     solution obj;
-    obj.frequency(s);
+    obj.frequency_map(s);
 }

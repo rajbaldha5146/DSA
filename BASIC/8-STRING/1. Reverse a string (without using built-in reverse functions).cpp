@@ -6,18 +6,20 @@ using namespace std;
 class solution
 {
 public:
-    void reverseString(string &s)
+    string reverseString(string &s)
     {
         int start = 0;
         int end = s.length() - 1;
+        string ans = s;
 
         while (start < end)
         {
-            swap(s[start], s[end]);
+            swap(ans[start], ans[end]);
             start++;
             end--;
         }
 
+        return ans;
         // reverse(s.begin(), s.end());
     }
 };
@@ -32,6 +34,6 @@ int main()
     getline(cin, s);
 
     solution obj;
-    obj.reverseString(s);
-    cout << "Your revesed string is : " << s << endl;
+    string ans = obj.reverseString(s);
+    cout << "Your revesed string is : " << ans << endl;
 }

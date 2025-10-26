@@ -1,4 +1,5 @@
-#include <iostream>
+// #include <iostream>
+#include<bits/stdc++.h>
 using namespace std;
 char firstNonRepeatingChar(string str)
 {
@@ -24,12 +25,33 @@ char firstNonRepeatingChar(string str)
     }
     return '\0'; // Null character (means no non-repeating character)
 }
+
+char firstNonRepeatingChar_map(string str)
+{
+    unordered_map<char,int>fre;
+
+    for( char ch : str )
+    {
+        fre[ch]++;
+    }
+
+    int n = str.size();
+    for( int i = 0; i < n; i++ )
+    {
+        if( fre[str[i]] == 1 )
+        {
+            return str[i];
+        }
+    }
+    return '\0';
+}
+
 int main()
 {
     string input;
     cout << "Enter a string: ";
     getline(cin, input);
-    char result = firstNonRepeatingChar(input);
+    char result = firstNonRepeatingChar_map(input);
     if (result != '\0')
     {
         cout << "First non-repeating character is: " << result << endl;

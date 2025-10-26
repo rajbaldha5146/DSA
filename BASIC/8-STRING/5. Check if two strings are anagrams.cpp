@@ -1,7 +1,9 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <cctype> // For tolower()
+// #include <iostream>
+// #include <string>
+// #include <vector>
+// #include <cctype> // For tolower()
+
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -49,6 +51,31 @@ public:
 
         cout << "Strings are anagrams." << endl;
     }
+
+    void isAnagrams_map(string &s1, string &s2)
+    {
+        unordered_map<char, int> fre;
+
+        for (char ch : s1)
+        {
+            fre[ch]++;
+        }
+        for (char ch : s2)
+
+        {
+            fre[ch]--;
+        }
+
+        for (auto key : fre)
+        {
+            if (key.second != 0)
+            {
+                cout << "Strings are not anagrams." << endl;
+                return;
+            }
+        }
+        cout << "Strings are anagrams." << endl;
+    }
 };
 
 int main()
@@ -62,6 +89,6 @@ int main()
     getline(cin, s2);
 
     solution obj;
-    obj.isAnagrams(s1, s2);
+    obj.isAnagrams_map(s1, s2);
     return 0;
 }
